@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="iProcedure.View.EditImagePage"
+             xmlns:local="clr-namespace:iProcedure.ViewModel" 
+             BackgroundColor="White"
+             Loaded="ContentPage_Loaded" >
+    <ContentPage.BindingContext>
+        <local:EditImageViewModel/>
+    </ContentPage.BindingContext>
+    
+    <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height= "50"/>
+            <RowDefinition Height= "50"/>
+        </Grid.RowDefinitions>
+
+        <skia:SKCanvasView x:Name="skiaView" Grid.Row="0" PaintSurface="OnPaintSurface" EnableTouchEvents="True" Touch="OnTouch" IgnorePixelScaling="True" />
+
+        <AbsoluteLayout Grid.Row="1" HorizontalOptions="FillAndExpand">
+            <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <Grid x:Name="PopupCropLayout" VerticalOptions="End" HorizontalOptions="FillAndExpand" HeightRequest="50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Text="Crop3_2" CornerRadius="0" BackgroundColor="Transparent" TextColor="Black" BorderColor="Black"
+                        Margin="10, 15, 5, 15" Padding="2, 2, 2, 2" BorderWidth="1" FontSize="Micro" Command="{Binding TogglePopupLayoutCommand}"
+                        CommandParameter="0"/>
+                    <Button Grid.Column="1" Text="Crop3_4" CornerRadius="0" BackgroundColor="Transparent" TextColor="Black" BorderColor="Black"
+                        Margin="5, 15, 5, 15" Padding="2, 2, 2, 2" BorderWidth="1" FontSize="Micro" Command="{Binding TogglePopupLayoutCommand}"
+                        CommandParameter="1"/>
+                    <Button Grid.Column="2" Text="Crop4_3" CornerRadius="0" BackgroundColor="Transparent" TextColor="Black" BorderColor="Black"
+                        Margin="5, 15, 5, 15" Padding="2, 2, 2, 2" BorderWidth="1" FontSize="Micro" Command="{Binding TogglePopupLayoutCommand}"
+                        CommandParameter="2"/>
+                    <Button Grid.Column="3" Text="Crop9_16" CornerRadius="0" BackgroundColor="Transparent" TextColor="Black" BorderColor="Black"
+                        Margin="5, 15, 5, 15" Padding="2, 2, 2, 2" BorderWidth="1" FontSize="Micro" Command="{Binding TogglePopupLayoutCommand}"
+                        CommandParameter="3"/>
+                    <Button Grid.Column="4" Text="Crop19_9" CornerRadius="0" BackgroundColor="Transparent" TextColor="Black" BorderColor="Black"
+                        Margin="5, 15, 10, 15" Padding="2, 2, 2, 2" BorderWidth="1" FontSize="Micro" Command="{Binding TogglePopupLayoutCommand}"
+                        CommandParameter="4"/>
+                </Grid>
+            </StackLayout>
+        </AbsoluteLayout>
+
+        <AbsoluteLayout Grid.Row="1" HorizontalOptions="FillAndExpand">
+            <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <Grid x:Name="PopupResizeLayout" VerticalOptions="End" HorizontalOptions="FillAndExpand" HeightRequest="50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                    </Grid.ColumnDefinitions>
+                    <RadioButton Grid.Column="0" Content="Percentage" FontSize="Micro" Margin="5, 5, 10, 15"/>
+                    <RadioButton Grid.Column="1" Content="Pixels" FontSize="Micro" Margin="5, 5, 10, 15"/>
+
+                    <Label Grid.Column="2" Text="Horizontal" FontSize="Micro" HorizontalTextAlignment="End" Margin="0, 15, 0, 0"/>
+                    <Frame Grid.Column="3" Padding="0" Margin="5, 10, 10, 20" CornerRadius="0"/>
+                    <Entry Grid.Column="3" FontSize="Micro" Margin="5, 5, 10, 15"/>
+
+                    <Label Grid.Column="4" Text="Vertical" FontSize="Micro" HorizontalTextAlignment="End" Margin="0, 15, 0, 0"/>
+                    <Frame Grid.Column="5" Padding="0" Margin="5, 10, 10, 20" CornerRadius="0"/>
+                    <Entry Grid.Column="5" FontSize="Micro" Margin="5, 5, 10, 15"/>
+                </Grid>
+            </StackLayout>
+        </AbsoluteLayout>
+
+        <AbsoluteLayout Grid.Row="1" HorizontalOptions="FillAndExpand">
+            <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <Grid x:Name="PopupRotateLayout" VerticalOptions="End" HorizontalOptions="FillAndExpand" HeightRequest="50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Text="Rotate right 90" CornerRadius="0" BackgroundColor="Transparent" TextColor="Black" BorderColor="Black"
+                        Margin="10, 15, 5, 15" Padding="2, 2, 2, 2" BorderWidth="1" FontSize="Micro" Command="{Binding TogglePopupLayoutCommand}"/>
+                    <Button Grid.Column="1" Text="Rotate left 90" CornerRadius="0" BackgroundColor="Transparent" TextColor="Black" BorderColor="Black"
+                        Margin="5, 15, 5, 15" Padding="2, 2, 2, 2" BorderWidth="1" FontSize="Micro" Command="{Binding TogglePopupLayoutCommand}"/>
+                    <Button Grid.Column="2" Text="Rotate 180" CornerRadius="0" BackgroundColor="Transparent" TextColor="Black" BorderColor="Black"
+                        Margin="5, 15, 5, 15" Padding="2, 2, 2, 2" BorderWidth="1" FontSize="Micro" Command="{Binding TogglePopupLayoutCommand}"/>
+                </Grid>
+            </StackLayout>
+        </AbsoluteLayout>
+
+        <AbsoluteLayout Grid.Row="1" HorizontalOptions="FillAndExpand">
+            <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <Grid x:Name="PopupFlipLayout" VerticalOptions="End" HorizontalOptions="FillAndExpand" HeightRequest="50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Text="Flip vertical" CornerRadius="0" BackgroundColor="Transparent" TextColor="Black" BorderColor="Black"
+                        Margin="10, 15, 5, 15" Padding="2, 2, 2, 2" BorderWidth="1" FontSize="Micro" Command="{Binding TogglePopupLayoutCommand}"/>
+                    <Button Grid.Column="1" Text="Flip horizontal" CornerRadius="0" BackgroundColor="Transparent" TextColor="Black" BorderColor="Black"
+                        Margin="5, 15, 5, 15" Padding="2, 2, 2, 2" BorderWidth="1" FontSize="Micro" Command="{Binding TogglePopupLayoutCommand}"/>
+                </Grid>
+            </StackLayout>
+        </AbsoluteLayout>
+
+        <AbsoluteLayout Grid.Row="1" HorizontalOptions="FillAndExpand">
+            <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <Grid x:Name="PopupBrigthnessLayout" VerticalOptions="End" HorizontalOptions="FillAndExpand" HeightRequest="50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Slider Maximum="100" Value="50" Margin="0, 5, 0, 0"/><!--ValueChanged="OnSliderValueChanged"-->
+                </Grid>
+            </StackLayout>
+        </AbsoluteLayout>
+
+        <AbsoluteLayout Grid.Row="1" HorizontalOptions="FillAndExpand">
+            <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <Grid x:Name="PopupContrastLayout" VerticalOptions="End" HorizontalOptions="FillAndExpand" HeightRequest="50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Slider Maximum="100" Value="50" Margin="0, 5, 0, 0"/>
+                    <!--ValueChanged="OnSliderValueChanged"-->
+                </Grid>
+            </StackLayout>
+        </AbsoluteLayout>
+
+        <AbsoluteLayout Grid.Row="1" HorizontalOptions="FillAndExpand">
+            <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <Grid x:Name="PopupSharpenLayout" VerticalOptions="End" HorizontalOptions="FillAndExpand" HeightRequest="50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Slider Maximum="100" Value="50" Margin="0, 5, 0, 0"/>
+                    <!--ValueChanged="OnSliderValueChanged"-->
+                </Grid>
+            </StackLayout>
+        </AbsoluteLayout>
+
+
+        <Grid Grid.Row="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="0" HeightRequest="50">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" VerticalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Text="Crop" FontSize="12" BackgroundColor="Transparent" TextColor="Black" Margin="3, 0, 3, 0" Padding="2"
+                    HorizontalOptions="FillAndExpand" VerticalOptions="Center" BorderWidth="1" BorderColor="Black" CornerRadius="0" Clicked="OnCrop">
+                </Button>
+                <Button Grid.Column="1" Text="Resize" FontSize="12" BackgroundColor="Transparent" TextColor="Black" Margin="3, 0, 3, 0" Padding="2"
+                    HorizontalOptions="FillAndExpand" VerticalOptions="Center" BorderWidth="1" BorderColor="Black" CornerRadius="0" Clicked="OnResize">
+                </Button>
+                <Button Grid.Column="2" Text="Rotate" FontSize="12" BackgroundColor="Transparent" TextColor="Black" Margin="3, 0, 3, 0" Padding="2"
+                    HorizontalOptions="FillAndExpand" VerticalOptions="Center" BorderWidth="1" BorderColor="Black" CornerRadius="0" Clicked="OnRotate">
+                </Button>
+                <Button Grid.Column="3" Text="Flip" FontSize="12" BackgroundColor="Transparent" TextColor="Black" Margin="3, 0, 3, 0" Padding="2"
+                    HorizontalOptions="FillAndExpand" VerticalOptions="Center" BorderWidth="1" BorderColor="Black" CornerRadius="0" Clicked="OnFlip">
+                </Button>
+                <Button Grid.Column="4" Text="Brightness" FontSize="12" BackgroundColor="Transparent" TextColor="Black" Margin="3, 0, 3, 0" Padding="2"
+                    HorizontalOptions="FillAndExpand" VerticalOptions="Center" BorderWidth="1" BorderColor="Black" CornerRadius="0" Clicked="OnBrightness">
+                </Button>
+            </Grid>
+
+            <Grid Grid.Row="1" VerticalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Text="Contrast" FontSize="12" BackgroundColor="Transparent" TextColor="Black" Margin="3, 0, 3, 0" Padding="2"
+                    HorizontalOptions="FillAndExpand" VerticalOptions="Center" BorderWidth="1" BorderColor="Black" CornerRadius="0" Clicked="OnContrast">
+                </Button>
+                <Button Grid.Column="1" Text="Sharpen" FontSize="12" BackgroundColor="Transparent" TextColor="Black" Margin="3, 0, 3, 0" Padding="2"
+                    HorizontalOptions="FillAndExpand" VerticalOptions="Center" BorderWidth="1" BorderColor="Black" CornerRadius="0" Clicked="OnSharpen">
+                </Button>
+                <Button Grid.Column="3" Text="Undo" FontSize="12" BackgroundColor="Transparent" TextColor="Black" Margin="3, 0, 3, 0" Padding="2"
+                    HorizontalOptions="FillAndExpand" VerticalOptions="Center" BorderWidth="1" BorderColor="Black" CornerRadius="0" Clicked="OnUndo">
+                </Button>
+                <Button Grid.Column="4" Text="Redo" FontSize="12" BackgroundColor="Transparent" TextColor="Black" Margin="3, 0, 3, 0" Padding="2"
+                    HorizontalOptions="FillAndExpand" VerticalOptions="Center" BorderWidth="1" BorderColor="Black" CornerRadius="0" Clicked="OnRedo">
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

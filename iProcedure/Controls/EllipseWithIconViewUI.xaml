@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iProcedure.Controls.EllipseWithIconViewUI"
+             x:Name="this">
+
+    <!--<ContentView.Resources>
+        <FontImageSource x:Key="fontImageSource" Color="{Binding borderColor}" Glyph="{Binding tmpGlyph}" FontFamily="{Binding fontFamily}" Size="{Binding fontSize}" />
+    </ContentView.Resources>
+
+    <Frame BindingContext="{x:Reference this}" HeightRequest="{Binding ellipseHeight}" WidthRequest="{Binding ellipseWidth}"
+        BackgroundColor="Black" BorderColor="{Binding borderColor}" CornerRadius="{Binding frameCornerRadius}" HasShadow="False" Padding="0" Margin="0" >
+        <ImageButton BackgroundColor="#FFFFFF" WidthRequest="{Binding imageWidth}" HeightRequest="{Binding imageHeight}" Margin="0, 0, 0, 0" VerticalOptions="Center" HorizontalOptions="Center"
+            CornerRadius="{Binding imageCornerRadius}" Aspect="Center" BorderWidth="1" BorderColor="Transparent" Command="{Binding Command}"
+            Source="{StaticResource fontImageSource}" />
+    </Frame>-->
+
+    <ContentView.Resources>
+        <FontImageSource x:Key="fontImageSource" Color="{Binding borderColor}" Glyph="{Binding tmpGlyph}" FontFamily="{Binding fontFamily}" Size="{Binding fontSize}" />
+    </ContentView.Resources>
+
+    <Grid BindingContext="{x:Reference this}" HeightRequest="{Binding ellipseHeight}" WidthRequest="{Binding ellipseWidth}"
+        BackgroundColor="Transparent" >
+        <Image>
+            <Image.Source>
+                <FontImageSource Color="{Binding borderColor}" Glyph="&#xe40c;" FontFamily="{Binding fontFamily}" Size="40" />
+            </Image.Source>
+        </Image>
+        
+        <ImageButton BackgroundColor="#FFFFFF" WidthRequest="{Binding imageWidth}" HeightRequest="{Binding imageHeight}" Margin="0, 0, 0, 0" VerticalOptions="Center" HorizontalOptions="Center"
+            CornerRadius="{Binding imageCornerRadius}" Aspect="Center" BorderWidth="1" BorderColor="{Binding borderColor}" Command="{Binding Command}"
+            Source="{StaticResource fontImageSource}" />
+    </Grid>
+</ContentView>

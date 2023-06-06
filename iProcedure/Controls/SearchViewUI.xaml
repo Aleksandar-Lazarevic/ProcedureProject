@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iProcedure.Controls.SearchViewUI"
+             x:Name="this">
+    <StackLayout Margin="10, 0, 10, 0">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height ="*"/>
+                <RowDefinition Height="1"/>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0" HorizontalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width ="*"/>
+                    <ColumnDefinition Width="{Binding deleteButtonWidth}"/>
+                    <ColumnDefinition Width="{Binding searchButtonWidth}"/>
+                </Grid.ColumnDefinitions>
+                <Entry Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent" Text="{Binding entryText}" />
+
+                <ImageButton  x:Name="deleteButton" Grid.Row="0" Grid.Column="1" BackgroundColor="#FFFFFF" 
+                    WidthRequest="{Binding deleteButtonWidth}" IsVisible="{Binding deleteButtonVisible}"
+                    Margin="0, 0, 0, 0" VerticalOptions="Center" HorizontalOptions="Center"
+                    CornerRadius="0" Aspect="Center" BorderWidth="1" BorderColor="Transparent">
+                    <ImageButton.Source>
+                        <FontImageSource Color="Black" Glyph="&#x078;" FontFamily="{OnPlatform iOS=AwesomeSolid,  Android=fa-solid-900.ttf#, WinUI=fa-solid-900.ttf#}" Size="12" />
+                    </ImageButton.Source>
+                </ImageButton>
+
+                <ImageButton Grid.Row="0" Grid.Column="2" BackgroundColor="#FFFFFF" WidthRequest="{Binding searchButtonWidth}" 
+                    Margin="0, 0, 0, 0" VerticalOptions="Center" HorizontalOptions="Center"
+                    CornerRadius="0" Aspect="Center" BorderWidth="1" BorderColor="Transparent">
+                    <ImageButton.Source>
+                        <FontImageSource Color="#c034dd" Glyph="&#xf002;" FontFamily="{OnPlatform iOS=AwesomeSolid,  Android=fa-solid-900.ttf#, WinUI=fa-solid-900.ttf#}" Size="15" />
+                    </ImageButton.Source>
+                </ImageButton>
+            </Grid>
+            
+            <Grid Grid.Row="1" HorizontalOptions="FillAndExpand">
+                <Label BackgroundColor="Black" HeightRequest="1" VerticalOptions="Fill"/>
+            </Grid>
+        </Grid>
+    </StackLayout>
+</ContentView>

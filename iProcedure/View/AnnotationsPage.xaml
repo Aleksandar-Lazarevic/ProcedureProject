@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iProcedure.View.AnnotationsPage"
+             xmlns:local="clr-namespace:iProcedure.ViewModel" 
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="AnnotationsPage">
+    <ContentPage.BindingContext>
+        <local:AnnotationsViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Loaded" Command="{Binding InitCommand}" />
+    </ContentPage.Behaviors>
+
+
+    
+    <Grid VerticalOptions="FillAndExpand" Margin="0, 0, 0, 20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="1" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0" VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal">
+                <ImageButton BackgroundColor="#FFFFFF" WidthRequest="{Binding imageWidth}" HeightRequest="{Binding imageHeight}" Margin="15, 0, 0, 0" VerticalOptions="Center" HorizontalOptions="Center"
+                 Aspect="Center" BorderWidth="1" CornerRadius="0" BorderColor="Transparent" Clicked="OnBack">
+                    <ImageButton.Source>
+                        <FontImageSource Glyph="&#x2329;" Color="#c034dd" 
+                            FontFamily="{OnPlatform iOS=AwesomeSolid,  Android=fa-solid-900.ttf#, WinUI=fa-solid-900.ttf#}"
+                            Size="22" />
+                    </ImageButton.Source>
+                </ImageButton>
+
+                <Label Text="Annotations" FontSize="15" FontAttributes="Bold" VerticalOptions="Center" Margin="15, 0, 0, 0" />
+            </StackLayout>
+        </Grid>
+
+        <Grid Grid.Row="1" VerticalOptions="FillAndExpand">
+            <Label BackgroundColor="Black" HeightRequest="1" VerticalOptions="Fill"/>
+        </Grid>
+
+        <Grid Grid.Row="2" VerticalOptions="FillAndExpand">
+            <StackLayout Margin="10, 0, 10, 0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="1"/>
+                        </Grid.RowDefinitions>
+                        <Button Grid.Row="0" Text="SHAPES" ContentLayout="Left, 0" FontSize="12" BackgroundColor="Transparent" TextColor="Black"
+                            HorizontalOptions="FillAndExpand" VerticalOptions="Center" CornerRadius="0" Command="{Binding ShapesFunc}">
+                            <Button.ImageSource>
+                                <FontImageSource FontFamily="{OnPlatform iOS=MaterialRegular,  Android=MaterialIcons-Regular.ttf#, WinUI=MaterialIcons-Regular.ttf#}" Glyph="&#xe574;" Color="#c034dd" Size="20"/>
+                            </Button.ImageSource>
+                        </Button>
+                        <Label x:Name="ShapeUnderLine" Grid.Row="1" BackgroundColor="Black" HeightRequest="1" VerticalOptions="Fill" IsVisible="{Binding showShapesUnderLine, Mode=TwoWay}"/>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="1"/>
+                        </Grid.RowDefinitions>
+                        <Button Grid.Row="0" Text="SIGNS" ContentLayout="Left, 0" FontSize="12" BackgroundColor="Transparent" TextColor="Black"
+                            HorizontalOptions="FillAndExpand" VerticalOptions="Center" CornerRadius="0" Command="{Binding SignsFunc}">
+                            <Button.ImageSource>
+                                <FontImageSource FontFamily="{OnPlatform iOS=MaterialRegular,  Android=MaterialIcons-Regular.ttf#, WinUI=MaterialIcons-Regular.ttf#}" Glyph="&#xe246;" Color="#c034dd" Size="20"/>
+                            </Button.ImageSource>
+                        </Button>
+                        <Label x:Name="SignsUnderLine" Grid.Row="1" BackgroundColor="{Binding underLineColor}" HeightRequest="1" VerticalOptions="Fill" IsVisible="{Binding showSignsUnderLine, Mode=TwoWay}"/>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="1"/>
+                        </Grid.RowDefinitions>
+                        <Button Grid.Row="0" Text="CALLOUTS" ContentLayout="Left, 0" FontSize="12" BackgroundColor="Transparent" TextColor="Black"
+                            HorizontalOptions="FillAndExpand" VerticalOptions="Center" CornerRadius="0" Command="{Binding CalloutsFunc}">
+                            <Button.ImageSource>
+                                <FontImageSource FontFamily="{OnPlatform iOS=MaterialRegular,  Android=MaterialIcons-Regular.ttf#, WinUI=MaterialIcons-Regular.ttf#}" Glyph="&#xe0cb;" Color="#c034dd" Size="20"/>
+                            </Button.ImageSource>
+                        </Button>
+                        <Label x:Name="CalloutsUnderLine" Grid.Row="1" BackgroundColor="{Binding underLineColor}" HeightRequest="1" VerticalOptions="Fill" IsVisible="{Binding showCalloutsLine, Mode=TwoWay}"/>
+                    </Grid>
+                </Grid>
+            </StackLayout>
+        </Grid>
+
+        <FlexLayout x:Name="ShapesGroup" Grid.Row="3" Wrap="Wrap" AlignContent="Start" Margin="10, 10, 10, 0">
+            <Frame WidthRequest="70" HeightRequest="70" BorderColor="Transparent" BackgroundColor="Transparent" Padding="0" CornerRadius="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <FlexLayout Grid.Row="0" Direction="Column">
+                        <Ellipse Fill="Transparent" Stroke="Red" StrokeThickness="2" WidthRequest="50" HeightRequest="50"/>
+                    </FlexLayout>
+                    <Label Grid.Row="1" Text="ROUND" HorizontalOptions="Center" VerticalOptions="End"/>
+                </Grid>
+            </Frame>
+            
+            <Frame WidthRequest="70" HeightRequest="70" BorderColor="Transparent" BackgroundColor="Transparent" Padding="0" CornerRadius="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <FlexLayout Grid.Row="0" Direction="Column">
+                        <Rectangle Stroke="Red" StrokeThickness="2" WidthRequest="50" HeightRequest="50" />
+                    </FlexLayout>
+                    <Label Grid.Row="1" Text="SQUARE" HorizontalOptions="Center" VerticalOptions="End"/>
+                </Grid>
+            </Frame>
+
+            <Frame WidthRequest="70" HeightRequest="70" BorderColor="Transparent" BackgroundColor="Transparent" Padding="0" CornerRadius="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <FlexLayout Grid.Row="0" Direction="Column">
+                        <Polygon Points="0,23 40,23 40,18 50,25 40,32 40,27 0,27 0,23" Aspect="Uniform" Fill="Red" Stroke="Red" StrokeThickness="1"/>
+                    </FlexLayout>
+                    <Label Grid.Row="1" Text="ARROW" HorizontalOptions="Center" VerticalOptions="End"/>
+                </Grid>
+            </Frame>
+
+            <Frame WidthRequest="70" HeightRequest="70" BorderColor="Transparent" BackgroundColor="Transparent" Padding="0" CornerRadius="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <FlexLayout Grid.Row="0" Direction="Column">
+                        <Polygon Points="0,25 10,18 10,23 40,23 40,18 50,25 40,32 40,27 10,27 10,32 0,25" Aspect="Uniform" Fill="Red" Stroke="Red" StrokeThickness="1"/>
+                    </FlexLayout>
+                    <Label Grid.Row="1" Text="ARROW2" HorizontalOptions="Center" VerticalOptions="End"/>
+                </Grid>
+            </Frame>
+
+            <Frame WidthRequest="70" HeightRequest="70" BorderColor="Transparent" BackgroundColor="Transparent" Padding="0" CornerRadius="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <FlexLayout Grid.Row="0" Direction="Column">
+                        <Polygon Points="0,23 40,23 40,18 50,25 40,32 40,27 0,27 0,23" Aspect="Uniform" Fill="Transparent" Stroke="Red" StrokeThickness="1"/>
+                    </FlexLayout>
+                    <Label Grid.Row="1" Text="ARROW3" HorizontalOptions="Center" VerticalOptions="End"/>
+                </Grid>
+            </Frame>
+
+            <Frame WidthRequest="70" HeightRequest="70" BorderColor="Transparent" BackgroundColor="Transparent" Padding="0" CornerRadius="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <FlexLayout Grid.Row="0" Direction="Column">
+                        <Polygon Points="0,24 50,24 50,26 0,26 0,24" Aspect="Uniform" Fill="Red" Stroke="Red" StrokeThickness="1" ScaleX="1" ScaleY="5"/>
+                    </FlexLayout>
+                    <Label Grid.Row="1" Text="LINE" HorizontalOptions="Center" VerticalOptions="End"/>
+                </Grid>
+            </Frame>
+        </FlexLayout>
+        
+        <StackLayout Grid.Row="4" Orientation="Horizontal" Margin="10, 10, 10, 0">
+            <Button Text="..." BackgroundColor="Transparent" TextColor="Black" Padding="0" Margin="20, 0, 20, 0" CornerRadius="0"
+                        BorderWidth="1" BorderColor="Black" WidthRequest="30" HeightRequest="30" Clicked="OnMenu"/>
+            <Button Text="+ ADD" BackgroundColor="Transparent" TextColor="Black" Padding="0" Margin="40, 0, 20, 0" CornerRadius="0"
+                        BorderWidth="1" BorderColor="Black" HeightRequest="30" HorizontalOptions="FillAndExpand" Clicked="OnAdd"/>
+        </StackLayout>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:iProcedure.Controls"
+             x:Class="iProcedure.MainPage"
+             xmlns:local="clr-namespace:iProcedure.ViewModel"
+             xmlns:views="clr-namespace:iProcedure.View"
+             
+             xmlns:vm="clr-namespace:iProcedure.ViewModel"
+			 x:DataType="vm:MainPageViewModel"
+             
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="False">
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel/>
+    </ContentPage.BindingContext>
+    <!--<NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Image BackgroundColor="#FFFFFF" WidthRequest="30" HeightRequest="30" HorizontalOptions="Start" Margin="0, 0, 0, 0">
+                <Image.Source>
+                    <FontImageSource Glyph="&#xf0c9;" Color="#c034dd" 
+                            FontFamily="{OnPlatform iOS=AwesomeSolid,  Android=fa-solid-900.ttf#, WinUI=fa-solid-900.ttf#}"
+                            Size="22" />
+                </Image.Source>
+            </Image>
+            <Label Text="iProcedure" FontSize="15" FontAttributes="Bold" VerticalOptions="Center" Margin="15, 0, 0, 0"/>
+            <Button Text="SAVE" HorizontalOptions="EndAndExpand" BackgroundColor="White" TextColor="Black" FontAttributes="Bold"/>
+        </StackLayout>
+    </NavigationPage.TitleView>-->
+    
+    <Grid VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="1" />
+            <RowDefinition Height="6.5*" />
+            <RowDefinition Height="6.5*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal">
+                <ImageButton BackgroundColor="#FFFFFF" Margin="15, 0, 0, 0" VerticalOptions="Center" HorizontalOptions="Center"
+                    Aspect="Center" BorderWidth="1" CornerRadius="0" BorderColor="Transparent" Command="{Binding GoGeneralBOM}">
+                    <ImageButton.Source>
+                        <FontImageSource Glyph="&#xf0c9;" Color="#c034dd" 
+                            FontFamily="{OnPlatform iOS=AwesomeSolid,  Android=fa-solid-900.ttf#, WinUI=fa-solid-900.ttf#}"
+                            Size="22" />
+                    </ImageButton.Source>
+                </ImageButton>
+                
+                <Label Text="iProcedure" FontSize="15" FontAttributes="Bold" VerticalOptions="Center" Margin="15, 0, 0, 0"/>
+                <Button Text="SAVE" HorizontalOptions="EndAndExpand" BackgroundColor="White" TextColor="Black" FontAttributes="Bold" Margin="0, 0, 15, 0" Padding="0"/>
+            </StackLayout>
+        </Grid>
+        
+        <Grid Grid.Row="1" VerticalOptions="FillAndExpand">
+            <Label x:Name="lbl_width11" BackgroundColor="Black" HeightRequest="1" Text="Width1" VerticalOptions="Fill"/>
+        </Grid>
+
+        <Grid Grid.Row="2" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+
+            <Image Source="test.jpg" WidthRequest="500" HeightRequest="500" />
+
+            <controls:EllipseWithIconViewUI Grid.Row="0" HorizontalOptions="Start" VerticalOptions="End" Margin="20, 0, 0, 20" 
+                fontFamily="{OnPlatform iOS=MaterialRegular,  Android=MaterialIcons-Regular.ttf#, WinUI=MaterialIcons-Regular.ttf#}"
+                borderColor="#c034dd" tmpGlyph="&#xe0cb;" ellipseWidth="45" ellipseHeight="45" imageWidth="36" imageHeight="36"
+                frameCornerRadius="20" imageCornerRadius="18" fontSize="22" Command="{Binding GoAnnotation}"/>
+            <controls:EllipseWithIconViewUI Grid.Row="0" HorizontalOptions="End" VerticalOptions="Start" Margin="0, 20, 20, 0" 
+                fontFamily="{OnPlatform iOS=MaterialRegular,  Android=MaterialIcons-Regular.ttf#, WinUI=MaterialIcons-Regular.ttf#}"
+                borderColor="#c034dd" tmpGlyph="&#xe241;" ellipseWidth="45" ellipseHeight="45"  imageWidth="36" imageHeight="36"
+                frameCornerRadius="20" imageCornerRadius="18" fontSize="22" Command="{Binding GoStepBOM}"/>
+            <controls:EllipseWithIconViewUI Grid.Row="0" HorizontalOptions="End" VerticalOptions="End" Margin="0, 0, 20, 20" 
+                fontFamily="{OnPlatform iOS=MaterialRegular,  Android=MaterialIcons-Regular.ttf#, WinUI=MaterialIcons-Regular.ttf#}"
+                borderColor="#c034dd" tmpGlyph="&#xe1bc;" ellipseWidth="45" ellipseHeight="45"  imageWidth="36" imageHeight="36"
+                frameCornerRadius="20" imageCornerRadius="18" fontSize="22" Command="{Binding SelectBackgroundImage}"/>
+
+
+            <Label x:Name="lbl_width21" Grid.Row="1" BackgroundColor="Black" HeightRequest="1" Text="Width1" VerticalOptions="Fill"/>
+        </Grid>
+
+        
+        
+        <Grid Grid.Row="3" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Label x:Name="lbl_width3" Grid.Row="0" BackgroundColor="White" Text="Width3" VerticalOptions="Fill"/>
+            <Label x:Name="lbl_width31" Grid.Row="1" BackgroundColor="Black" HeightRequest="1" Text="Width1" VerticalOptions="Fill"/>
+        </Grid>
+        
+        
+
+        <Grid Grid.Row="4" VerticalOptions="FillAndExpand">
+            <Button Text="steps" ContentLayout="Top, 0" FontSize="12" BackgroundColor="Transparent" TextColor="Black" Padding="0" WidthRequest="30" 
+                    HorizontalOptions="End" VerticalOptions="Center" Margin="0, 0, 10, 0">
+                <Button.ImageSource>
+                    <FontImageSource FontFamily="{OnPlatform iOS=AwesomeSolid,  Android=fa-solid-900.ttf#, WinUI=fa-solid-900.ttf#}" Glyph="&#xf54b;" Color="#c034dd" Size="20"/>
+                </Button.ImageSource>
+            </Button>
+        </Grid>
+    </Grid>
+
+</ContentPage>

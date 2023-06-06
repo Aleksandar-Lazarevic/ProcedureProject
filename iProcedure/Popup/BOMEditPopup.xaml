@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iProcedure.Popup.BOMEditPopup"
+             xmlns:local="clr-namespace:iProcedure.ViewModel.Popup" 
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+    <toolkit:Popup.BindingContext>
+        <local:BOMEditPopupViewModel/>
+    </toolkit:Popup.BindingContext>
+    
+    <VerticalStackLayout WidthRequest="350" HeightRequest="430" Padding="0" Margin="0">
+        <Label x:Name="TopInfomation0" Text="Multiple items selected. Please choose the field(s) to be updated." FontSize="Micro" HorizontalOptions="Center" VerticalOptions="Start"/>
+
+        <!--<Grid x:Name="TopInfomation1" HorizontalOptions="FillAndExpand" Margin="40, 10, 40, 10" ItemsSource="{Binding selBOMIndexes}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Text="Edit Values" FontSize="Small"/>
+            <Border Grid.Column="2" Stroke="#C2C2C2" HeightRequest="20" StrokeThickness="1" StrokeShape="Ellipse"
+                Padding="5,0,5,0" Background="#C2C2C2" HorizontalOptions="Start" Margin="20, 0, 0, 0">
+                <Label Grid.Column="1" Text="{Binding .}" FontSize="Small"/>
+            </Border>
+        </Grid>-->
+        <Grid x:Name="TopInfomation1" HorizontalOptions="FillAndExpand" Margin="40, 10, 40, 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Text="Edit Values" FontSize="Small" Margin="0, 0, 20, 0"/>
+            <!--<ScrollView Grid.Column="1" VerticalOptions="StartAndExpand" Margin="0">-->
+            <CollectionView Grid.Column="1" ItemsSource="{Binding selBOMIndexes}" ItemsLayout="VerticalGrid, 10" VerticalOptions="StartAndExpand" >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="0">
+                            <Border Stroke="#C2C2C2" HeightRequest="20" WidthRequest="20" StrokeThickness="1" StrokeShape="Ellipse"
+                                Padding="5,0,5,0" Background="#C2C2C2" HorizontalOptions="Start">
+                                <Label Text="{Binding .}" FontSize="Small"/>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <!--</ScrollView>-->
+        </Grid>
+        
+
+        <Grid Margin="20, 10, 20, 10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <CheckBox Grid.Row="0" Grid.Column="0" Margin="0, 0, 10, 0" IsVisible="False">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="Color" Value="#6e3647" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="IsChecked">
+                                <VisualState.Setters>
+                                    <Setter Property="Color" Value="#6e3647" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+            </CheckBox>
+            <Label Grid.Row="0" Grid.Column="1" Text="Sort String" VerticalOptions="Center"/>
+            <Entry Grid.Row="0" Grid.Column="2" Text="{Binding strSortString}"/>
+
+            <CheckBox x:Name="CodeCheck" Grid.Row="1" Grid.Column="0" Margin="0, 0, 10, 0" IsEnabled="False">
+                <!--<CheckBox.Behaviors>
+                    <toolkit:EventToCommandBehavior EventName="CheckedChanged" Command="{Binding SelectionChanged}"/>
+                </CheckBox.Behaviors>-->
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="Color" Value="#6e3647" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="IsChecked">
+                                <VisualState.Setters>
+                                    <Setter Property="Color" Value="#6e3647" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+            </CheckBox>
+            <Label Grid.Row="1" Grid.Column="1" Text="Code" VerticalOptions="Center"/>
+            <Entry x:Name="CodeEntry" Grid.Row="1" Grid.Column="2" Text="{Binding strCode}"/>
+
+            <CheckBox x:Name="DescripttionCheck" Grid.Row="2" Grid.Column="0" IsChecked="{Binding chkDescription, Mode=TwoWay}" Margin="0, 0, 10, 0">
+                <!--<CheckBox.Behaviors>
+                    <toolkit:EventToCommandBehavior EventName="CheckedChanged" Command="{Binding SelectionChanged}"/>
+                </CheckBox.Behaviors>-->
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="Color" Value="#6e3647" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="IsChecked">
+                                <VisualState.Setters>
+                                    <Setter Property="Color" Value="#6e3647" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+            </CheckBox>
+            <Label Grid.Row="2" Grid.Column="1" Text="Descripttion" VerticalOptions="Center"/>
+            <Entry Grid.Row="2" Grid.Column="2" Text="{Binding strDescription}"/>
+
+            <CheckBox x:Name="QuantityCheck" Grid.Row="3" Grid.Column="0" IsChecked="{Binding chkQuantity, Mode=TwoWay}" Margin="0, 0, 10, 0">
+                <!--<CheckBox.Behaviors>
+                    <toolkit:EventToCommandBehavior EventName="CheckedChanged" Command="{Binding SelectionChanged}"/>
+                </CheckBox.Behaviors>-->
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="Color" Value="#6e3647" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="IsChecked">
+                                <VisualState.Setters>
+                                    <Setter Property="Color" Value="#6e3647" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+            </CheckBox>
+            <Label Grid.Row="3" Grid.Column="1" Text="Quantity" VerticalOptions="Center"/>
+            <Entry Grid.Row="3" Grid.Column="2" Text="{Binding strQuantity}"/>
+
+            <CheckBox x:Name="UnitCheck" Grid.Row="4" Grid.Column="0" IsChecked="{Binding chkUnit, Mode=TwoWay}" Margin="0, 0, 10, 0">
+                <!--<CheckBox.Behaviors>
+                    <toolkit:EventToCommandBehavior EventName="CheckedChanged" Command="{Binding SelectionChanged}"/>
+                </CheckBox.Behaviors>-->
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="Color" Value="#6e3647" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="IsChecked">
+                                <VisualState.Setters>
+                                    <Setter Property="Color" Value="#6e3647" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+            </CheckBox>
+            <Label Grid.Row="4" Grid.Column="1" Text="Unit" VerticalOptions="Center"/>
+            <Grid Grid.Row="4" Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Picker Grid.Column="0" ItemsSource="{Binding Units}" ItemDisplayBinding="{Binding unit_name}" SelectedIndex="{Binding selectedIndex}" 
+                        IsVisible="{Binding isVisiblePicker}" SelectedIndexChanged="Picker_SelectedIndexChanged">
+                    <Picker.Behaviors>
+                        <toolkit:EventToCommandBehavior EventName="SelectedIndexChanged" Command="{Binding SelectedIndexChanged}"/>
+                    </Picker.Behaviors>
+                </Picker>
+                <Entry x:Name="addNewItemEntry" Grid.Column="0" IsVisible="{Binding isVisibleEntry}" Text="{Binding strNewUnit}"/>
+
+                <ImageButton Grid.Column="1" BackgroundColor="Transparent" Margin="0, 0, 0, 0" VerticalOptions="Center" HorizontalOptions="Start"
+                    CornerRadius="0" Aspect="Center" BorderWidth="1" BorderColor="Transparent" Command="{Binding ShowUpDownArrow}">
+                    <ImageButton.Source>
+                        <FontImageSource Color="Black" Glyph="{Binding arrow}" FontFamily="{OnPlatform iOS=AwesomeSolid,  Android=fa-solid-900.ttf#, WinUI=fa-solid-900.ttf#}" Size="12"/>
+                    </ImageButton.Source>
+                </ImageButton>
+            </Grid>
+
+            <CheckBox x:Name="BulkMaterialCheck" Grid.Row="5" Grid.Column="0" IsChecked="{Binding chkBulkMaterial, Mode=TwoWay}" Margin="0, 0, 10, 0">
+                <!--<CheckBox.Behaviors>
+                    <toolkit:EventToCommandBehavior EventName="CheckedChanged" Command="{Binding SelectionChanged}"/>
+                </CheckBox.Behaviors>-->
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="Color" Value="#6e3647" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="IsChecked">
+                                <VisualState.Setters>
+                                    <Setter Property="Color" Value="#6e3647" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+            </CheckBox>
+            <Label Grid.Row="5" Grid.Column="1" Text="Bulk Material" VerticalOptions="Center"/>
+            <Switch Grid.Row="5" Grid.Column="2" HorizontalOptions="Start" IsToggled="{Binding bToggled}"/>
+        </Grid>
+
+        <Grid HorizontalOptions="FillAndExpand" Margin="0, 0, 0, 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0"  Text="Cancel" ContentLayout="Left, 0" FontSize="12" BackgroundColor="Transparent" TextColor="Black" Margin="5, 0, 10, 0" Padding="7"
+                    HorizontalOptions="Center" VerticalOptions="Center" BorderWidth="1" BorderColor="Black" CornerRadius="0" WidthRequest="80" HeightRequest="30"
+                    Command="{Binding CancelFunc}">
+            </Button>
+            <Button Grid.Column="1"  Text="Save" ContentLayout="Left, 0" FontSize="12" BackgroundColor="Transparent" TextColor="Black" Margin="5, 0, 10, 0" Padding="7"
+                    HorizontalOptions="Center" VerticalOptions="Center" BorderWidth="1" BorderColor="Black" CornerRadius="0" WidthRequest="80" HeightRequest="30"
+                    Command="{Binding DoFunc}">
+            </Button>
+        </Grid>
+    </VerticalStackLayout>
+</toolkit:Popup>

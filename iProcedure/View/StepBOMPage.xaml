@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iProcedure.View.StepBOMPage"
+             xmlns:local="clr-namespace:iProcedure.ViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="StepBOMPage">
+    <ContentPage.BindingContext>
+        <local:StepBOMViewModel/>
+    </ContentPage.BindingContext>
+
+    <!--<NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <ImageButton BackgroundColor="#FFFFFF" WidthRequest="{Binding imageWidth}" HeightRequest="{Binding imageHeight}" Margin="0, 0, 0, 0" VerticalOptions="Center" HorizontalOptions="Center"
+                 Aspect="Center" BorderWidth="1" CornerRadius="0" BorderColor="Transparent" Clicked="OnBack">
+                <ImageButton.Source>
+                    <FontImageSource Glyph="&#x2329;" Color="#c034dd" 
+                            FontFamily="{OnPlatform iOS=AwesomeSolid,  Android=fa-solid-900.ttf#, WinUI=fa-solid-900.ttf#}"
+                            Size="22" />
+                </ImageButton.Source>
+            </ImageButton>
+
+            <Label Text="Step BOM" FontSize="15" FontAttributes="Bold" VerticalOptions="Center" Margin="15, 0, 0, 0"/>
+        </StackLayout>
+    </NavigationPage.TitleView>-->
+
+    <Grid VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />   
+            <RowDefinition Height="1" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="70" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal">
+                <ImageButton BackgroundColor="#FFFFFF" Margin="15, 0, 0, 0" VerticalOptions="Center" HorizontalOptions="Center"
+                 Aspect="Center" BorderWidth="1" CornerRadius="0" BorderColor="Transparent" Clicked="OnBack">
+                    <ImageButton.Source>
+                        <FontImageSource Glyph="&#x2329;" Color="#c034dd" 
+                            FontFamily="{OnPlatform iOS=AwesomeSolid,  Android=fa-solid-900.ttf#, WinUI=fa-solid-900.ttf#}"
+                            Size="22" />
+                    </ImageButton.Source>
+                </ImageButton>
+
+                <Label Text="Step BOM" FontSize="15" FontAttributes="Bold" VerticalOptions="Center" Margin="15, 0, 0, 0"/>
+            </StackLayout>
+        </Grid>
+        
+        <Grid Grid.Row="1" VerticalOptions="FillAndExpand">
+            <Label BackgroundColor="Black" HeightRequest="1" VerticalOptions="Fill"/>
+        </Grid>
+
+        <Grid Grid.Row="2" VerticalOptions="FillAndExpand">
+            <StackLayout Margin="10, 0, 10, 0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height ="*"/>
+                        <RowDefinition Height="1"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" HorizontalOptions="FillAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width ="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+                        <Entry Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent" Text="{Binding entryText}">
+                            <Entry.Behaviors>
+                                <toolkit:EventToCommandBehavior EventName="Unfocused" Command="{Binding OnEntryUnfocused}"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <ImageButton  x:Name="deleteButton" Grid.Row="0" Grid.Column="1" BackgroundColor="#FFFFFF" 
+                            WidthRequest="20" IsEnabled="{Binding deleteButtonVisible}"
+                            Margin="0, 0, 0, 0" VerticalOptions="Center" HorizontalOptions="Center" 
+                            CornerRadius="0" Aspect="Center" BorderWidth="1" BorderColor="Transparent">
+                            <ImageButton.Source>
+                                <FontImageSource Color="{Binding color}" Glyph="&#x078;" FontFamily="{OnPlatform iOS=AwesomeSolid,  Android=fa-solid-900.ttf#, WinUI=fa-solid-900.ttf#}" Size="12" />
+                            </ImageButton.Source>
+                        </ImageButton>
+
+                        <ImageButton Grid.Row="0" Grid.Column="2" BackgroundColor="#FFFFFF" WidthRequest="20" 
+                            Margin="0, 0, 0, 0" VerticalOptions="Center" HorizontalOptions="Center"
+                            CornerRadius="0" Aspect="Center" BorderWidth="1" BorderColor="Transparent">
+                            <ImageButton.Source>
+                                <FontImageSource Color="#c034dd" Glyph="&#xf002;" FontFamily="{OnPlatform iOS=AwesomeSolid,  Android=fa-solid-900.ttf#, WinUI=fa-solid-900.ttf#}" Size="15" />
+                            </ImageButton.Source>
+                        </ImageButton>
+                    </Grid>
+
+                    <Grid Grid.Row="1" HorizontalOptions="FillAndExpand">
+                        <Label BackgroundColor="Black" HeightRequest="1" VerticalOptions="Fill"/>
+                    </Grid>
+                </Grid>
+            </StackLayout>
+        </Grid>
+
+        <Grid Grid.Row="3" VerticalOptions="FillAndExpand" Margin="10, 0, 10, 0">
+            <ListView ItemsSource="{Binding stepBOMItems}" HasUnevenRows="true" Header="{Binding .}" SeparatorColor="Black">
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <StackLayout BackgroundColor="LightGray" Padding="45, 0, 0, 0">
+                            <Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Red color Bold"/>
+                                        <Span Text="Binding strDescription" TextColor="Red"/>
+                                        <Span Text="$" TextColor="Black"/>
+                                        <Span Text="$" TextColor="Grey"/>
+                                        <Span Text="$" TextColor="Grey"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="40" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="{Binding strNumber}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Label Grid.Column="1" BackgroundColor="Aqua">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Red color Bold"/>
+                                            <Span Text="{Binding strDescription}" TextColor="Red"/>
+                                            <Span Text="$" TextColor="Black"/>
+                                            <Span Text="$" TextColor="Grey"/>
+                                            <Span Text="$" TextColor="Grey"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <!--<Label Grid.Column="2" Text="{Binding strQuantity}" HorizontalOptions="Center" TextColor="Black"/>-->
+                                <Border Grid.Column="2" Stroke="#C49B33" HeightRequest="20" StrokeThickness="1" StrokeShape="Ellipse"
+                                    Padding="5,0,5,0" Background="Transparent" HorizontalOptions="Center">
+                                    <Label Text="{Binding strQuantity}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
+                                </Border>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <StackLayout Grid.Row="4" Orientation="Horizontal" Margin="10, 10, 10, 0">
+            <Button Text="HIDE USED PARTS" ContentLayout="Left, 0" FontSize="12" BackgroundColor="Transparent" TextColor="Black" Margin="5, 0, 10, 0" Padding="14, 7, 14, 7"
+                    HorizontalOptions="EndAndExpand" VerticalOptions="Center" BorderWidth="1" BorderColor="Black" CornerRadius="0" WidthRequest="160" HeightRequest="30">
+                <Button.ImageSource>
+                    <FontImageSource FontFamily="{OnPlatform iOS=AwesomeSolid,  Android=fa-solid-900.ttf#, WinUI=fa-solid-900.ttf#}" Glyph="&#xf070;" Color="Black" Size="18"/>
+                </Button.ImageSource>
+            </Button>
+
+            <Button Text="Edit/Display" ContentLayout="Left, 0" FontSize="12" BackgroundColor="Transparent" TextColor="Black" Margin="5, 0, 10, 0" Padding="30, 7, 30, 7"
+                    HorizontalOptions="End" VerticalOptions="Center" BorderWidth="1" BorderColor="Black" CornerRadius="0" WidthRequest="160" HeightRequest="30">
+                <Button.ImageSource>
+                    <FontImageSource FontFamily="{OnPlatform iOS=AwesomeSolid,  Android=fa-solid-900.ttf#, WinUI=fa-solid-900.ttf#}" Glyph="&#x270f;" Color="Black" Size="18"/>
+                </Button.ImageSource>
+            </Button>
+        </StackLayout>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iProcedure.View.BackgroundImagePage"
+             xmlns:local="clr-namespace:iProcedure.ViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="Step Image">
+    <ContentPage.BindingContext>
+        <local:BackgroundImageViewModel/>
+    </ContentPage.BindingContext>
+
+    <!--<NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <ImageButton BackgroundColor="#FFFFFF" Margin="15, 0, 0, 0" VerticalOptions="Center" HorizontalOptions="Center"
+                 Aspect="Center" BorderWidth="1" CornerRadius="0" BorderColor="Transparent" Clicked="OnBack">
+                <ImageButton.Source>
+                    <FontImageSource Glyph="&#x2329;" Color="#c034dd" 
+                            FontFamily="{OnPlatform iOS=AwesomeSolid,  Android=fa-solid-900.ttf#, WinUI=fa-solid-900.ttf#}"
+                            Size="22" />
+                </ImageButton.Source>    
+            </ImageButton>
+
+            <Label Text="Step Image" FontSize="15" FontAttributes="Bold" VerticalOptions="Center" Margin="15, 0, 0, 0"/>
+        </StackLayout>
+    </NavigationPage.TitleView>-->
+
+    <Grid VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="1" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="70" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal">
+                <ImageButton BackgroundColor="#FFFFFF" WidthRequest="{Binding imageWidth}" HeightRequest="{Binding imageHeight}" Margin="15, 0, 0, 0" VerticalOptions="Center" HorizontalOptions="Center"
+                 Aspect="Center" BorderWidth="1" CornerRadius="0" BorderColor="Transparent" Clicked="OnBack">
+                    <ImageButton.Source>
+                        <FontImageSource Glyph="&#x2329;" Color="#c034dd" 
+                            FontFamily="{OnPlatform iOS=AwesomeSolid,  Android=fa-solid-900.ttf#, WinUI=fa-solid-900.ttf#}"
+                            Size="22" />
+                    </ImageButton.Source>
+                </ImageButton>
+
+                <Label Text="Step Image" FontSize="15" FontAttributes="Bold" VerticalOptions="Center" Margin="15, 0, 0, 0"/>
+            </StackLayout>
+        </Grid>
+        
+        <Grid Grid.Row="1" VerticalOptions="FillAndExpand">
+            <Label BackgroundColor="Black" HeightRequest="1" VerticalOptions="Fill"/>
+        </Grid>
+
+        <Grid Grid.Row="2" VerticalOptions="FillAndExpand">
+            <StackLayout Margin="10, 0, 10, 0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="1"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" HorizontalOptions="FillAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+                        <Entry Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent" Text="{Binding entryText}">
+                            <Entry.Behaviors>
+                                <toolkit:EventToCommandBehavior EventName="Unfocused" Command="{Binding OnEntryUnfocused}"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <ImageButton  x:Name="deleteButton" Grid.Row="0" Grid.Column="1" BackgroundColor="#FFFFFF" 
+                            WidthRequest="20" IsEnabled="{Binding deleteButtonVisible}"
+                            Margin="0, 0, 0, 0" VerticalOptions="Center" HorizontalOptions="Center" 
+                            CornerRadius="0" Aspect="Center" BorderWidth="1" BorderColor="Transparent"> 
+                            <ImageButton.Source>
+                                <FontImageSource Color="{Binding color}" Glyph="&#x078;" FontFamily="{OnPlatform iOS=AwesomeSolid,  Android=fa-solid-900.ttf#, WinUI=fa-solid-900.ttf#}" Size="12" />
+                            </ImageButton.Source>
+                        </ImageButton>
+
+                        <ImageButton Grid.Row="0" Grid.Column="2" BackgroundColor="#FFFFFF" WidthRequest="20" 
+                            Margin="0, 0, 0, 0" VerticalOptions="Center" HorizontalOptions="Center"
+                            CornerRadius="0" Aspect="Center" BorderWidth="1" BorderColor="Transparent"> 
+                            <ImageButton.Source>
+                                <FontImageSource Color="#c034dd" Glyph="&#xf002;" FontFamily="{OnPlatform iOS=AwesomeSolid,  Android=fa-solid-900.ttf#, WinUI=fa-solid-900.ttf#}" Size="15" />
+                            </ImageButton.Source>
+                        </ImageButton>
+                    </Grid>
+
+                    <Grid Grid.Row="1" HorizontalOptions="FillAndExpand">
+                        <Label BackgroundColor="Black" HeightRequest="1" VerticalOptions="Fill"/>
+                    </Grid>
+                </Grid>
+            </StackLayout>
+        </Grid>
+
+        <ScrollView Grid.Row="3" VerticalOptions="StartAndExpand" Margin="0">
+            <CollectionView Grid.Row="3" ItemsSource="{Binding stepImageItems}" ItemsLayout="VerticalGrid, 3" VerticalOptions="StartAndExpand">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="{Binding gridHeight}" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="{Binding gridWidth}" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Row="0" HorizontalOptions="Center"
+                               Source="{Binding strPath}" 
+                               Aspect="AspectFill" />
+                            <Label Grid.Row="1" 
+                               Text="{Binding strName}" 
+                               FontAttributes="Bold" HorizontalOptions="Center"
+                               LineBreakMode="TailTruncation" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+      
+        <Grid Grid.Row="4" VerticalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Text="Edit" FontSize="12" BackgroundColor="Transparent" TextColor="Black" Margin="10, 0, 5, 0"
+                    HorizontalOptions="FillAndExpand" VerticalOptions="Center" BorderWidth="1" BorderColor="Black" CornerRadius="0" Command="{Binding EditFunc}">
+            </Button>
+            <Button Grid.Column="1" Text="System resource" FontSize="12" BackgroundColor="Transparent" TextColor="Black" Margin="5, 0, 5, 0"
+                    HorizontalOptions="FillAndExpand" VerticalOptions="Center" BorderWidth="1" BorderColor="Black" CornerRadius="0" Command="{Binding SystemResourceFunc}">
+            </Button>
+            <Button Grid.Column="2" Text="Camera" ContentLayout="Left, 0" FontSize="12" BackgroundColor="Transparent" TextColor="Black" Margin="5, 0, 10, 0"
+                    HorizontalOptions="FillAndExpand" VerticalOptions="Center" BorderWidth="1" BorderColor="Black" CornerRadius="0" Command="{Binding CameraFunc}">
+                <Button.ImageSource>
+                    <FontImageSource FontFamily="{OnPlatform iOS=AwesomeSolid,  Android=fa-solid-900.ttf#, WinUI=fa-solid-900.ttf#}" Glyph="&#xf332;" Color="#c034dd" Size="20"/>
+                </Button.ImageSource>
+            </Button>
+        </Grid>
+    </Grid>
+</ContentPage>
